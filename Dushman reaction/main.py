@@ -345,26 +345,26 @@ def k_fold_mask(number_sample, k_fold=5, seed=0):
 
 if __name__ == '__main__':
     '''set the value for some variable'''
-    # kw = -14
-    # T = 25 + 273.15
-    # kT = math.pow(10, 555 / T + 7.355 - 2.575 * math.log10(T))
-    #
-    # k_1 = 9.4 * math.pow(10, 7)
-    # k_2 = 4.6 * math.pow(10, -11)
-    # k_3 = 9.5
-    #
-    #
-    # profiles_exp = pd.read_excel('Dushman reaction.xlsx', sheet_name='exp')
-    # profiles_exp = np.array(profiles_exp)[:, 1:].T
-    # condition_exp = pd.read_excel('Dushman reaction.xlsx', sheet_name='cond')
-    # condition_exp = np.array(condition_exp)[:, 1:]
+    kw = -14
+    T = 25 + 273.15
+    kT = math.pow(10, 555 / T + 7.355 - 2.575 * math.log10(T))
+    
+    k_1 = 9.4 * math.pow(10, 7)
+    k_2 = 4.6 * math.pow(10, -11)
+    k_3 = 9.5
+    
+    
+    profiles_exp = pd.read_excel('Dushman reaction.xlsx', sheet_name='exp')
+    profiles_exp = np.array(profiles_exp)[:, 1:].T
+    condition_exp = pd.read_excel('Dushman reaction.xlsx', sheet_name='cond')
+    condition_exp = np.array(condition_exp)[:, 1:]
 
-    '''generate simulated data'''
+    # '''generate simulated data'''
     # condition_simulate = []
     # h_list = np.arange(-5, -1.9, 0.2).tolist()
     # i_list = np.arange(-4, -0.9, 0.2).tolist()
     # io3_list = np.arange(-5, -0.9, 0.2).tolist()
-    #
+    
     # count = 0
     # io3_simulate = []
     # i_simulate = []
@@ -373,7 +373,7 @@ if __name__ == '__main__':
     #     for i in i_list:
     #         for io3 in io3_list:
     #             count += 1
-    #             print(count, end=': ')
+    #             #print(count, end=': ')
     #             io3_result, i3_result, i_result, h_result = result_t(h, io3, i)
     #             if io3_result is None:
     #                 print('Pass-start')
@@ -383,14 +383,14 @@ if __name__ == '__main__':
     #                 i3_simulate.append(i3_result)
     #                 io3_simulate.append(io3_result)
     #                 i_simulate.append(i_result)
-    #                 print([h, i, io3, i - h, io3 - h, io3 - i], ': ', i3_result)
-    #
+    #                 #print([h, i, io3, i - h, io3 - h, io3 - i], ': ', i3_result)
+    
     # np.save('condition_simulate-used.npy', condition_simulate)
     # np.save('i3_simulate-used.npy', i3_simulate)
     # np.save('io3_simulate-used.npy', io3_simulate)
     # np.save('i_simulate-used.npy', i_simulate)
     # print(len(condition_simulate))
-    # raise ValueError
+    #raise ValueError
 
     '''compare the profiles from experiment and simulation'''
     # color = ["#C8557C", "#A050A0", "#4292C6", "#5F9EA0", "#E9967A", "#F5DEB3", "#663366",]
@@ -431,7 +431,7 @@ if __name__ == '__main__':
     #                 fontdict={'fontfamily': 'Arial', 'fontsize': '18', 'fontweight': '500'})
     #         ax.legend(ncol=3, loc='upper left', markerscale=0.5, frameon=False, numpoints=0.25, handlelength=1,
     #                    prop={'family': 'Arial', 'size': '16', 'weight': '500'})
-    #
+    
     #         plt.savefig('Figures/S9-'+str((index+1)//6)+'.svg', dpi=600)
     #         plt.figure()
     #         left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
@@ -445,6 +445,7 @@ if __name__ == '__main__':
 
 
     '''Figure s15'''
+    # condition_simulate = np.load('condition_simulate-used.npy', allow_pickle=True)
     # plt.figure()
     # left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
     # rect = [left, bottom, width, height]
@@ -468,6 +469,7 @@ if __name__ == '__main__':
     # ax.set_xlabel(r'$Log_{10}$' + r'$([H^+])$', labelpad=5, fontsize=22)
     # ax.tick_params(length=4, width=1.5, which='major')
     # plt.show()
+    # plt.savefig('Figures/S15-1.svg', dpi=600)
 
     # ax.hist(condition_simulate[:, 1], width=0.225, color="#87CEFA", align="mid",
     #         linewidth=1, edgecolor='black', alpha=0.6)
@@ -483,7 +485,7 @@ if __name__ == '__main__':
     # ax.set_xlabel(r'$Log_{10}$' + r'$([IO_3^-])$', labelpad=5, fontsize=22)
     # ax.tick_params(length=4, width=1.5, which='major')
     # plt.savefig('Figures/S10-2.svg', dpi=600)
-    #
+    
     # ax.hist(condition_simulate[:, 2], width=0.225, color="#87CEFA",  align="mid",
     #           linewidth=1, edgecolor='black', alpha=0.6)
     # ax.set_xlim(-4, -0.85)
@@ -497,7 +499,8 @@ if __name__ == '__main__':
     # ax.set_ylabel('Frequency', labelpad=5, fontsize=22, fontweight='500')
     # ax.set_xlabel(r'$Log_{10}$'+r'$([I^-])$', labelpad=5, fontsize=22)
     # ax.tick_params(length=4, width=1.5, which='major')
-    # plt.show()
+    # # plt.show()
+    # plt.savefig('Figures/S15-2.svg', dpi=600)
 
 
     '''preprocess the data'''
@@ -508,12 +511,12 @@ if __name__ == '__main__':
     #     i = np.log(condition_exp[index, 2]) -3
     #     condition.append([h, io3, i, h-i, h-io3, io3-i])
     # condition_exp = np.array(condition)
-    #
+    
     # condition_simulate = np.load('condition_simulate-used.npy', allow_pickle=True)
     # profiles_simulate = np.load('i_simulate-used.npy', allow_pickle=True)
     # i3_profiles = np.load('i3_simulate-used.npy', allow_pickle=True)
     # io3_profiles = np.load('io3_simulate-used.npy', allow_pickle=True)
-    #
+    
     # mask_filter = []
     # for index in range(condition_simulate.shape[0]):
     #     profile = io3_profiles[index, :]
@@ -525,16 +528,16 @@ if __name__ == '__main__':
     #             mask_filter.append(False)
     #     else:
     #         mask_filter.append(False)
-    #
+    
     # condition_simulate = condition_simulate[mask_filter, :]
     # profiles_simulate = profiles_simulate[mask_filter, :]
     # print(condition_simulate.shape)
-    #
+    
     # for i in range(profiles_simulate.shape[0]):
     #     for j in range(profiles_simulate.shape[1]):
     #         if profiles_simulate[i, j] < 0:
     #             profiles_simulate[i, j] = 0
-    #
+    
     # for index in range(condition_simulate.shape[0]):
     #     profiles_simulate[index, :] = profiles_simulate[index, :]/math.pow(10, condition_simulate[index, 2])
 
@@ -542,12 +545,12 @@ if __name__ == '__main__':
     #     profile = profiles_simulate[index, 0:10]
     #     plt.plot(np.arange(0, profile.shape[0], 1), profile.tolist())
     # plt.show()
-
+    # plt.savefig('Figures/preprocess.svg', dpi=600)
 
     '''model compare'''
     # globalvaribale.init()
     # data_simulate = np.c_[condition_simulate[:, 0:6], profiles_simulate]
-    #
+    
     # mask_cv = k_fold_mask(data_simulate.shape[0], 5, seed=0)
     # mask_all = [index for index in range(data_simulate.shape[0])]
     # metrics = []
@@ -568,7 +571,7 @@ if __name__ == '__main__':
     #                 mcb = MCB('XGBoost', train, test, 1, np.arange(1, 2+1, 1).tolist(), time, time, True)
     #                 y_test_true, y_test_pred, x_data, preds, y_train_true, y_train_pred = mcb.inference(test)
     #                 a = mean_absolute_error(y_test_true, y_test_pred)
-    #
+    
     #                 # mcb = MCB('XGBoost', train, test, 1, np.arange(1, 1 + 1, 1).tolist(), time, time, True)
     #                 # y_test_true, y_test_pred, x_data, preds, y_train_true, y_train_pred = mcb.inference(test)
     #                 # b = mean_absolute_error(y_test_true, y_test_pred)
@@ -576,7 +579,7 @@ if __name__ == '__main__':
     #                 # mt = MT('XGBoost', train, test, time, time)
     #                 # y_test_true, y_test_pred, x, y_train_true, y_train_pred = mt.inference(test)
     #                 # c = mean_absolute_error(y_test_true, y_test_pred)
-    #
+    
     #                 metric_a.append(a)
     #                 # metric_b.append(b)
     #             #     metric_c.append(c)
@@ -588,291 +591,355 @@ if __name__ == '__main__':
     #                           np.mean(metric_a))
     #             metrics.append(metric_a)
     #             infos.append([num, depth, child])
-    #
+    
     # np.save('metrics_dushman_opt_hp-i-1-2-30.npy', metrics)
     # np.save('infos_dushman_opt_hp-i-1-2-30.npy', infos)
-    # raise ValueError
+    #raise ValueError
 
-    # data = np.load('metrics_dushman_opt_hp-30-i.npy', allow_pickle=True)
-    # infos = np.load('infos_dushman_opt_hp-30-i.npy', allow_pickle=True)
-    # metric_erml = data[:, 0:5]
-    # metric_rml = data[:, 5:10]
-    # metric_ml = data[:, 10:15]
-    #
-    # average_erml = np.mean(metric_erml, axis=1)
-    # mask_erml = np.argsort(average_erml)
-    # print(average_erml[mask_erml])
-    # infos_erml = infos[mask_erml]
-    # print(infos_erml)
-    #
-    # average_rml = np.mean(metric_rml, axis=1)
-    # mask_rml = np.argsort(average_rml)
-    # print(average_rml[mask_rml])
-    # infos_rml = infos[mask_rml]
-    # print(infos_rml)
-    #
-    # average_ml = np.mean(metric_ml, axis=1)
-    # mask_ml = np.argsort(average_ml)
-    # print(average_ml[mask_ml])
-    # infos_ml = infos[mask_ml]
-    # print(infos_ml)
+    #data = np.load('metrics_dushman_opt_hp-30-i.npy', allow_pickle=True)
+    #infos = np.load('infos_dushman_opt_hp-30-i.npy', allow_pickle=True)
+    data = np.load('metrics_dushman_opt_hp-i-1-2-30.npy', allow_pickle=True)
+    infos = np.load('infos_dushman_opt_hp-i-1-2-30.npy', allow_pickle=True)
+    metric_erml = data[:, 0:5]
+    metric_rml = data[:, 5:10]
+    metric_ml = data[:, 10:15]
+    
+    average_erml = np.mean(metric_erml, axis=1)
+    mask_erml = np.argsort(average_erml)
+    print(average_erml[mask_erml])
+    infos_erml = infos[mask_erml]
+    print(infos_erml)
+    
+    average_rml = np.mean(metric_rml, axis=1)
+    mask_rml = np.argsort(average_rml)
+    print(average_rml[mask_rml])
+    infos_rml = infos[mask_rml]
+    print(infos_rml)
+    
+    average_ml = np.mean(metric_ml, axis=1)
+    mask_ml = np.argsort(average_ml)
+    print(average_ml[mask_ml])
+    infos_ml = infos[mask_ml]
+    print(infos_ml)
     # raise ValueError
 
 
     '''model training and evaluation'''
-    # from plot import EP_plot
-    # globalvaribale.init()
-    # data_simulate = np.c_[condition_simulate[:, 0:6], profiles_simulate]
-    # mask_train, mask_test = train_test_split(data_simulate, 0.2, 1)
-    # train, test = data_simulate[mask_train, :], data_simulate[mask_test, :]
-    # print(test.shape)
-    # print(test)
-    # np.savetxt('Dushman-i-train.txt', train)
-    # np.savetxt('Dushman-i-test.txt', test)
+    from plot import EP_plot
+    globalvaribale.init()
+    condition_simulate = np.load('condition_simulate-used.npy', allow_pickle=True)
+    profiles_simulate = np.load('i_simulate-used.npy', allow_pickle=True)
+    data_simulate = np.c_[condition_simulate[:, 0:6], profiles_simulate]
+    mask_train, mask_test = train_test_split(data_simulate, 0.2, 1)
+    train, test = data_simulate[mask_train, :], data_simulate[mask_test, :]
+    print(test.shape)
+    print(test)
+    np.savetxt('Dushman-i-train.txt', train)
+    np.savetxt('Dushman-i-test.txt', test)
 
-    # time = np.arange(0, 50.5, 5)[1:]
-    # # time = np.arange(0, 90, 0.5)[1:]
+    time = np.arange(0, 50.5, 5)[1:]
+    # time = np.arange(0, 90, 0.5)[1:]
+    
+    params = {'eta': 0.1, 'max_depth': 8, 'min_child_weight': 11,
+                  'num_boost_round': 100 * 5}
+    globalvaribale.set_value('params', params)
+    model = MCB('XGBoost', train, test, 1, [1, 2], time, time, True)
+    y_test_true, y_test_pred, x_data, preds, y_train_true, y_train_pred = model.inference(test)
+    
+    profiles_true = y_test_true.T.reshape(test.shape[0], -1)
+    profiles_pred = y_test_pred.T.reshape(test.shape[0], -1)
     #
-    # params = {'eta': 0.1, 'max_depth': 8, 'min_child_weight': 11,
-    #               'num_boost_round': 100 * 5}
-    # globalvaribale.set_value('params', params)
-    # model = MCB('XGBoost', train, test, 1, [1, 2], time, time, True)
-    # y_test_true, y_test_pred, x_data, preds, y_train_true, y_train_pred = model.inference(test)
-    #
-    # profiles_true = y_test_true.T.reshape(test.shape[0], -1)
-    # profiles_pred = y_test_pred.T.reshape(test.shape[0], -1)
-    # #
-    # profiles_pred_r = reverse_profile(profiles_pred, test[:, 1])
-    # profiles_true_r = reverse_profile(profiles_true, test[:, 1])
-    #
-    # true = np.array(profiles_true_r).reshape(1, -1)[0]
-    # pred = np.array(profiles_pred_r).reshape(1, -1)[0]
-    # EP_plot(profiles_true[:, -10:].reshape(1, -1)[0]*100, profiles_pred[:, -10:].reshape(1, -1)[0]*100)
-    # print(mean_absolute_error(profiles_true[:, 0:10].reshape(1, -1)[0], profiles_pred[:, 0:10].reshape(1, -1)[0]))
+    profiles_pred_r = reverse_profile(profiles_pred, test[:, 1])
+    profiles_true_r = reverse_profile(profiles_true, test[:, 1])
+    
+    true = np.array(profiles_true_r).reshape(1, -1)[0]
+    pred = np.array(profiles_pred_r).reshape(1, -1)[0]
+    EP_plot(profiles_true[:, -10:].reshape(1, -1)[0]*100, profiles_pred[:, -10:].reshape(1, -1)[0]*100)
+    print(mean_absolute_error(profiles_true[:, 0:10].reshape(1, -1)[0], profiles_pred[:, 0:10].reshape(1, -1)[0]))
 
-    # params = {'eta': 0.1, 'max_depth': 10, 'min_child_weight': 2,
-    #           'num_boost_round': 100 * 2}
-    # globalvaribale.set_value('params', params)
-    # mt = MT('XGBoost', train, test, time, time)
-    # y_test_true, y_test_pred, x, y_train_true, y_train_pred = mt.inference(test)
-    # profiles_true = y_test_true.T.reshape(test.shape[0], -1)
-    # profiles_pred = y_test_pred.T.reshape(test.shape[0], -1)
-    #
-    # EP_plot(profiles_true[:, -10:].reshape(1, -1)[0]*100, profiles_pred[:, -10:].reshape(1, -1)[0]*100)
-    #
-    # profiles_pred_r = reverse_profile(profiles_pred, test[:, 1])
-    # profiles_true_r = reverse_profile(profiles_true, test[:, 1])
-    #
-    # true = np.array(profiles_true_r).reshape(1, -1)[0]
-    # pred = np.array(profiles_pred_r).reshape(1, -1)[0]
-    # print(mean_absolute_error(y_test_true, y_test_pred))
+    params = {'eta': 0.1, 'max_depth': 10, 'min_child_weight': 2,
+              'num_boost_round': 100 * 2}
+    globalvaribale.set_value('params', params)
+    mt = MT('XGBoost', train, test, time, time)
+    y_test_true, y_test_pred, x, y_train_true, y_train_pred = mt.inference(test)
+    profiles_true = y_test_true.T.reshape(test.shape[0], -1)
+    profiles_pred = y_test_pred.T.reshape(test.shape[0], -1)
+    
+    EP_plot(profiles_true[:, -10:].reshape(1, -1)[0]*100, profiles_pred[:, -10:].reshape(1, -1)[0]*100)
+    
+    profiles_pred_r = reverse_profile(profiles_pred, test[:, 1])
+    profiles_true_r = reverse_profile(profiles_true, test[:, 1])
+    
+    true = np.array(profiles_true_r).reshape(1, -1)[0]
+    pred = np.array(profiles_pred_r).reshape(1, -1)[0]
+    print(mean_absolute_error(y_test_true, y_test_pred))
 
-    # maes_profile = []
-    # maes_profile_r = []
-    # for index in range(profiles_true.shape[0]):
-    #     mae_temp = mean_absolute_error(profiles_true[index, :], profiles_pred[index, :])
-    #     maes_profile.append(mae_temp)
-    #     mae_temp_r = mean_absolute_error(profiles_true_r[index, :], profiles_pred_r[index, :])
-    #     maes_profile_r.append(mae_temp_r)
-    # print(len(maes_profile_r))
-    # print(len([mae for mae in maes_profile_r if mae > 10*1e-3]))
+    maes_profile = []
+    maes_profile_r = []
+    for index in range(profiles_true.shape[0]):
+        mae_temp = mean_absolute_error(profiles_true[index, :], profiles_pred[index, :])
+        maes_profile.append(mae_temp)
+        mae_temp_r = mean_absolute_error(profiles_true_r[index, :], profiles_pred_r[index, :])
+        maes_profile_r.append(mae_temp_r)
+    print(len(maes_profile_r))
+    print(len([mae for mae in maes_profile_r if mae > 10*1e-3]))
     # raise ValueError
 
 
     '''Fig S17-a and 17-d'''
-    # ax.set_xlim(-1, 11)
-    # ax.set_ylim(-1, 11)
-    # ax.set_xticks([0, 2, 4, 6, 8, 10])
-    # ax.set_xticklabels([0, 2, 4, 6, 8, 10],
-    #                    fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.set_yticks([0, 2, 4, 6, 8, 10])
-    # ax.set_yticklabels([0, 2, 4, 6, 8, 10],
-    #                    fontfamily='Arial', fontsize=18, fontweight='500')
-    # plt.plot([-1, 11], [-1, 11], c='#C26275', linestyle='dashed', zorder=0)
-    # ax.text(x=6.5, y=1.5, s=r'$R^2$' + ' = ' + str(np.round(r2_score(true, pred), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
-    # ax.text(x=6.5, y=0.5, s='MAE = ' + str(np.round(mean_absolute_error(true, pred), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
-    # ax.text(x=6.5, y=-0.5, s='RMSE = ' + str(np.round(np.sqrt(mean_squared_error(true, pred)), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
-    # plt.show()
+    plt.figure()
+    left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
+    rect = [left, bottom, width, height]
+    ax = plt.axes(rect)
+    ax.spines['left'].set_linewidth(1.5)
+    ax.spines['right'].set_linewidth(1.5)
+    ax.spines['top'].set_linewidth(1.5)
+    ax.spines['bottom'].set_linewidth(1.5)
+
+    ax.set_xlim(-1, 11)
+    ax.set_ylim(-1, 11)
+    ax.set_xticks([0, 2, 4, 6, 8, 10])
+    ax.set_xticklabels([0, 2, 4, 6, 8, 10],
+                       fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.set_yticks([0, 2, 4, 6, 8, 10])
+    ax.set_yticklabels([0, 2, 4, 6, 8, 10],
+                       fontfamily='Arial', fontsize=18, fontweight='500')
+    plt.plot([-1, 11], [-1, 11], c='#C26275', linestyle='dashed', zorder=0)
+    ax.text(x=6.5, y=1.5, s=r'$R^2$' + ' = ' + str(np.round(r2_score(true, pred), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    ax.text(x=6.5, y=0.5, s='MAE = ' + str(np.round(mean_absolute_error(true, pred), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    ax.text(x=6.5, y=-0.5, s='RMSE = ' + str(np.round(np.sqrt(mean_squared_error(true, pred)), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    #plt.show()
+    plt.savefig('Figures/S17.svg', dpi=600)
 
     '''figure S18-a'''
-    # ax.set_xlim(-0.5, 5.5)
-    # ax.set_ylim(-0.5, 5.5)
-    # ax.set_xticks([0, 1, 2, 3, 4, 5])
-    # ax.set_xticklabels([0, 1, 2, 3, 4, 5],
-    #                    fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.set_yticks([0, 1, 2, 3, 4, 5])
-    # ax.set_yticklabels([0, 1, 2, 3, 4, 5],
-    #                    fontfamily='Arial', fontsize=18, fontweight='500')
-    # plt.plot([-0.5, 5.5], [-0.5, 5.5], c='#C26275', linestyle='dashed', zorder=0)
-    # ax.text(x=6.5/2, y=1.5/2, s=r'$R^2$' + ' = ' + str(np.round(r2_score(true, pred), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
-    # ax.text(x=6.5/2, y=0.5/2, s='MAE = ' + str(np.round(mean_absolute_error(true, pred), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
-    # ax.text(x=6.5/2, y=-0.5/2, s='RMSE = ' + str(np.round(np.sqrt(mean_squared_error(true, pred)), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    plt.figure()
+    left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
+    rect = [left, bottom, width, height]
+    ax = plt.axes(rect)
+    ax.spines['left'].set_linewidth(1.5)
+    ax.spines['right'].set_linewidth(1.5)
+    ax.spines['top'].set_linewidth(1.5)
+    ax.spines['bottom'].set_linewidth(1.5)
+
+    ax.set_xlim(-0.5, 5.5)
+    ax.set_ylim(-0.5, 5.5)
+    ax.set_xticks([0, 1, 2, 3, 4, 5])
+    ax.set_xticklabels([0, 1, 2, 3, 4, 5],
+                       fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.set_yticks([0, 1, 2, 3, 4, 5])
+    ax.set_yticklabels([0, 1, 2, 3, 4, 5],
+                       fontfamily='Arial', fontsize=18, fontweight='500')
+    plt.plot([-0.5, 5.5], [-0.5, 5.5], c='#C26275', linestyle='dashed', zorder=0)
+    ax.text(x=6.5/2, y=1.5/2, s=r'$R^2$' + ' = ' + str(np.round(r2_score(true, pred), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    ax.text(x=6.5/2, y=0.5/2, s='MAE = ' + str(np.round(mean_absolute_error(true, pred), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    ax.text(x=6.5/2, y=-0.5/2, s='RMSE = ' + str(np.round(np.sqrt(mean_squared_error(true, pred)), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    plt.savefig('Figures/S18-a.svg', dpi=600)
 
     '''figure s18-d'''
-    # ax.set_xlim(-0.25, 2.75)
-    # ax.set_ylim(-0.25, 2.75)
-    # ax.set_xticks([0, 0.5, 1.0, 1.5, 2, 2.5])
-    # ax.set_xticklabels([0, 0.5, 1.0, 1.5, 2, 2.5],
-    #                    fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.set_yticks([0, 0.5, 1.0, 1.5, 2, 2.5])
-    # ax.set_yticklabels([0, 0.5, 1.0, 1.5, 2, 2.5],
-    #                    fontfamily='Arial', fontsize=18, fontweight='500')
-    # plt.plot([-0.25, 2.75], [-0.25, 2.75], c='#C26275', linestyle='dashed', zorder=0)
-    # ax.text(x=6.5 / 4, y=1.5 / 4, s=r'$R^2$' + ' = ' + str(np.round(r2_score(true, pred), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
-    # ax.text(x=6.5 / 4, y=0.5 / 4, s='MAE = ' + str(np.round(mean_absolute_error(true, pred), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
-    # ax.text(x=6.5 / 4, y=-0.5 / 4, s='RMSE = ' + str(np.round(np.sqrt(mean_squared_error(true, pred)), 3)),
-    #         fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    plt.figure()
+    left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
+    rect = [left, bottom, width, height]
+    ax = plt.axes(rect)
+    ax.spines['left'].set_linewidth(1.5)
+    ax.spines['right'].set_linewidth(1.5)
+    ax.spines['top'].set_linewidth(1.5)
+    ax.spines['bottom'].set_linewidth(1.5)
+
+    ax.set_xlim(-0.25, 2.75)
+    ax.set_ylim(-0.25, 2.75)
+    ax.set_xticks([0, 0.5, 1.0, 1.5, 2, 2.5])
+    ax.set_xticklabels([0, 0.5, 1.0, 1.5, 2, 2.5],
+                       fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.set_yticks([0, 0.5, 1.0, 1.5, 2, 2.5])
+    ax.set_yticklabels([0, 0.5, 1.0, 1.5, 2, 2.5],
+                       fontfamily='Arial', fontsize=18, fontweight='500')
+    plt.plot([-0.25, 2.75], [-0.25, 2.75], c='#C26275', linestyle='dashed', zorder=0)
+    ax.text(x=6.5 / 4, y=1.5 / 4, s=r'$R^2$' + ' = ' + str(np.round(r2_score(true, pred), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    ax.text(x=6.5 / 4, y=0.5 / 4, s='MAE = ' + str(np.round(mean_absolute_error(true, pred), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
+    ax.text(x=6.5 / 4, y=-0.5 / 4, s='RMSE = ' + str(np.round(np.sqrt(mean_squared_error(true, pred)), 3)),
+            fontdict={'family': 'Arial', 'size': '18', 'weight': '500'})
     # plt.show()
+    plt.savefig('Figures/S18-d.svg', dpi=600)
 
     '''Fig S17-b, S17-e, S18-b and S18-e'''
-    # import seaborn as sns
-    # left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
-    # rect = [left, bottom, width, height]
-    # ax = plt.axes(rect)
-    # ax.spines['left'].set_linewidth(1.5)
-    # ax.spines['right'].set_linewidth(1.5)
-    # ax.spines['top'].set_linewidth(1.5)
-    # ax.spines['bottom'].set_linewidth(1.5)
-    # ax.set_ylabel('Density', labelpad=10, fontsize=22, fontweight='500')
-    # ax.set_xlabel('Error of Conc.' + r'$(\mu$'+'M)', labelpad=10, fontsize=22)
-    # ax.tick_params(length=4, width=1.5, which='major')
-    # from scipy.stats import norm
-    # sns.distplot(np.array(maes_profile_r)*1e3, bins=50, hist=True,
-    #                  kde=True, ax=ax,
-    #                  kde_kws={'linestyle': '-', 'linewidth': '0', 'color': "#4292C6"},  # '#A050A0' '#D2D2FF'
-    #                  hist_kws={'width': 0.8, 'align': 'mid', 'color': '#BBE6FF', "edgecolor": '#000000',
-    #                            'linewidth': '1.0'},
-    #                  fit=None)
+    import seaborn as sns
+    plt.figure()
+    left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
+    rect = [left, bottom, width, height]
+    ax = plt.axes(rect)
+    ax.spines['left'].set_linewidth(1.5)
+    ax.spines['right'].set_linewidth(1.5)
+    ax.spines['top'].set_linewidth(1.5)
+    ax.spines['bottom'].set_linewidth(1.5)
 
-    # ax.set_xlim(-5, 300)
-    # ax.set_ylim(0, 0.2)
-    # ax.set_xticks([0, 100, 200, 300])
-    # ax.set_xticklabels([0, 100, 200, 300],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.set_yticks([0, 0.05, 0.10, 0.15, 0.20])
-    # ax.set_yticklabels(['0.00', '0.05', '0.10', '0.15', '0.20'],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
+    left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
+    rect = [left, bottom, width, height]
+    ax = plt.axes(rect)
+    ax.spines['left'].set_linewidth(1.5)
+    ax.spines['right'].set_linewidth(1.5)
+    ax.spines['top'].set_linewidth(1.5)
+    ax.spines['bottom'].set_linewidth(1.5)
+    ax.set_ylabel('Density', labelpad=10, fontsize=22, fontweight='500')
+    ax.set_xlabel('Error of Conc.' + r'$(\mu$'+'M)', labelpad=10, fontsize=22)
+    ax.tick_params(length=4, width=1.5, which='major')
+    from scipy.stats import norm
+    sns.distplot(np.array(maes_profile_r)*1e3, bins=50, hist=True,
+                     kde=True, ax=ax,
+                     kde_kws={'linestyle': '-', 'linewidth': '0', 'color': "#4292C6"},  # '#A050A0' '#D2D2FF'
+                     hist_kws={'width': 0.8, 'align': 'mid', 'color': '#BBE6FF', "edgecolor": '#000000',
+                               'linewidth': '1.0'},
+                     fit=None)
+
+    ax.set_xlim(-5, 300)
+    ax.set_ylim(0, 0.2)
+    ax.set_xticks([0, 100, 200, 300])
+    ax.set_xticklabels([0, 100, 200, 300],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.set_yticks([0, 0.05, 0.10, 0.15, 0.20])
+    ax.set_yticklabels(['0.00', '0.05', '0.10', '0.15', '0.20'],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
     # plt.show()
+    plt.savefig('Figures/S17-be.svg', dpi=600)
 
-    # ax.set_xlim(-2.5, 62.5)
-    # ax.set_ylim(0, 0.7)
-    # ax.set_xticks([0, 15, 30, 45, 60])
-    # ax.set_xticklabels([0, 15, 30, 45, 60],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.set_yticks([0, 0.2, 0.4, 0.6])
-    # ax.set_yticklabels(['0.0', '0.2', '0.4', '0.6'],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
+    plt.figure()
+    left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
+    rect = [left, bottom, width, height]
+    ax = plt.axes(rect)
+    ax.spines['left'].set_linewidth(1.5)
+    ax.spines['right'].set_linewidth(1.5)
+    ax.spines['top'].set_linewidth(1.5)
+    ax.spines['bottom'].set_linewidth(1.5)
 
-    # ax.set_xlim(-50, 1550)
-    # ax.set_ylim(0, 0.035)
-    # ax.set_xticks([0, 375, 750, 1125, 1500])
-    # ax.set_xticklabels([0, 375, 750, 1125, 1500],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.set_yticks([0, 0.010, 0.020, 0.030])
-    # ax.set_yticklabels(['0.000', '0.010', '0.020', '0.030'],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
-    # plt.show()
+    ax.set_xlim(-2.5, 62.5)
+    ax.set_ylim(0, 0.7)
+    ax.set_xticks([0, 15, 30, 45, 60])
+    ax.set_xticklabels([0, 15, 30, 45, 60],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.set_yticks([0, 0.2, 0.4, 0.6])
+    ax.set_yticklabels(['0.0', '0.2', '0.4', '0.6'],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
 
-    # ax.set_xlim(-5, 205)
-    # ax.set_ylim(0, 0.2)
-    # ax.set_xticks([0, 50, 100, 150, 200])
-    # ax.set_xticklabels([0, 50, 100, 150, 200],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.set_yticks([0, 0.05, 0.1, 0.15, 0.20])
-    # ax.set_yticklabels(['0.00', '0.05', '0.10', '0.15', '0.20'],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
-    # plt.show()
+    ax.set_xlim(-50, 1550)
+    ax.set_ylim(0, 0.035)
+    ax.set_xticks([0, 375, 750, 1125, 1500])
+    ax.set_xticklabels([0, 375, 750, 1125, 1500],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.set_yticks([0, 0.010, 0.020, 0.030])
+    ax.set_yticklabels(['0.000', '0.010', '0.020', '0.030'],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
+    #plt.show()
+    plt.savefig('Figures/S18-b.svg', dpi=600)
 
+    plt.figure()
+    left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
+    rect = [left, bottom, width, height]
+    ax = plt.axes(rect)
+    ax.spines['left'].set_linewidth(1.5)
+    ax.spines['right'].set_linewidth(1.5)
+    ax.spines['top'].set_linewidth(1.5)
+    ax.spines['bottom'].set_linewidth(1.5)
+
+    ax.set_xlim(-5, 205)
+    ax.set_ylim(0, 0.2)
+    ax.set_xticks([0, 50, 100, 150, 200])
+    ax.set_xticklabels([0, 50, 100, 150, 200],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.set_yticks([0, 0.05, 0.1, 0.15, 0.20])
+    ax.set_yticklabels(['0.00', '0.05', '0.10', '0.15', '0.20'],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
+    plt.show()
+    plt.savefig('Figures/S18-e.svg', dpi=600)
 
     '''Fig S17c, S17f, S18c, and S18f'''
-    # from plot import range_brace
-    # plt.figure()
-    # left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
-    # rect = [left, bottom, width, height]
-    # ax = plt.axes(rect)
-    # ax.spines['left'].set_linewidth(1.5)
-    # ax.spines['right'].set_linewidth(1.5)
-    # ax.spines['top'].set_linewidth(1.5)
-    # ax.spines['bottom'].set_linewidth(1.5)
-    #
-    # ax.set_ylim(-0.1, 1.1)
-    # ax.set_yticks(np.array([0, 0.2, 0.4, 0.6, 0.8, 1.0]))
-    # ax.set_yticklabels(np.array([0, 0.2, 0.4, 0.6, 0.8, 1.0]),
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.set_ylabel(r'$C/C_0$', labelpad=5, fontsize=22, fontweight='500')
-    # ax.set_xlabel('Time (s)', labelpad=5, fontsize=22)
-    # ax.tick_params(length=4, width=1.5, which='major')
-    # mask = np.argsort(maes_profile)
-    # c = ['#9DC3E6', '#A9D18E', '#F4B183']
+    from plot import range_brace
+    plt.figure()
+    left, bottom, width, height = 0.18, 0.18, 0.78, 0.78
+    rect = [left, bottom, width, height]
+    ax = plt.axes(rect)
+    ax.spines['left'].set_linewidth(1.5)
+    ax.spines['right'].set_linewidth(1.5)
+    ax.spines['top'].set_linewidth(1.5)
+    ax.spines['bottom'].set_linewidth(1.5)
+    
+    ax.set_ylim(-0.1, 1.1)
+    ax.set_yticks(np.array([0, 0.2, 0.4, 0.6, 0.8, 1.0]))
+    ax.set_yticklabels(np.array([0, 0.2, 0.4, 0.6, 0.8, 1.0]),
+                           fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.set_ylabel(r'$C/C_0$', labelpad=5, fontsize=22, fontweight='500')
+    ax.set_xlabel('Time (s)', labelpad=5, fontsize=22)
+    ax.tick_params(length=4, width=1.5, which='major')
+    mask = np.argsort(maes_profile)
+    c = ['#9DC3E6', '#A9D18E', '#F4B183']
 
-    # mask_selected = [9, 81, 168] # S12-1
-    # mask_selected = [8, 77, 156] # S 14-1
-    # for index in range(len(mask_selected)):
-    #     print(math.pow(10, test[mask_selected[index], 0]+3), math.pow(10, test[mask_selected[index], 1]+3),
-    #           math.pow(10, test[mask_selected[index], 2]+3))
-    #     print(maes_profile_r[mask[mask_selected[index]]]*1e3)
-    #     ax.plot(np.arange(0, 5.5, 0.5),
-    #                 [1] + profiles_true[mask_selected[index], :].tolist(),
-    #                  marker='o', c=c[index], label='Simulated', markersize=8,)
-    #     ax.plot(np.arange(0, 5.5, 0.5),
-    #                     [1] + profiles_pred[mask_selected[index], :].tolist(),
-    #                  marker='D', c=c[index], label='Predicted', markersize=8)
-    # plt.legend(loc=(0.025, 0.01), frameon=False, prop={'family': 'Arial', 'size': '14', 'weight': '500'})
-    # ax.set_xlim(-0.25, 5.25)
-    # ax.set_xticks([0, 1, 2, 3, 4, 5])
-    # ax.set_xticklabels([0, 1, 2, 3, 4, 5],
-    #                    fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.plot(range_brace(0, 3.5, height=0.05)[1] * 1 + 1.6, range_brace(0, 4)[0] / 30 + 0.425-0.115, color='black', lw=1.0,
-    #             clip_on=False)
-    # ax.plot(range_brace(0, 3.5, height=0.05)[1] * 1 + 1.6, range_brace(0, 4)[0] / 30 + 0.25-0.115, color='black', lw=1.0,
-    #             clip_on=False)
-    # ax.plot(range_brace(0, 3.5, height=0.05)[1] * 1 + 1.6, range_brace(0, 4)[0] / 30 + 0.07-0.115, color='black', lw=1.0,
-    #             clip_on=False)
-    # ax.text(1.7, 0.35+0.025, s='low error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
-    #             ha='left', va='center')
-    # ax.text(1.7, 0.175+0.025, s='medium error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
-    #             ha='left', va='center')
-    # ax.text(1.7, 0.025, s='high error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
-    #             ha='left', va='center')
+    mask_selected = [9, 81, 168] # S12-1
+    mask_selected = [8, 77, 156] # S 14-1
+    for index in range(len(mask_selected)):
+        print(math.pow(10, test[mask_selected[index], 0]+3), math.pow(10, test[mask_selected[index], 1]+3),
+              math.pow(10, test[mask_selected[index], 2]+3))
+        print(maes_profile_r[mask[mask_selected[index]]]*1e3)
+        ax.plot(np.arange(0, 5.5, 0.5),
+                    [1] + profiles_true[mask_selected[index], :].tolist(),
+                     marker='o', c=c[index], label='Simulated', markersize=8,)
+        ax.plot(np.arange(0, 5.5, 0.5),
+                        [1] + profiles_pred[mask_selected[index], :].tolist(),
+                     marker='D', c=c[index], label='Predicted', markersize=8)
+    plt.legend(loc=(0.025, 0.01), frameon=False, prop={'family': 'Arial', 'size': '14', 'weight': '500'})
+    ax.set_xlim(-0.25, 5.25)
+    ax.set_xticks([0, 1, 2, 3, 4, 5])
+    ax.set_xticklabels([0, 1, 2, 3, 4, 5],
+                       fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.plot(range_brace(0, 3.5, height=0.05)[1] * 1 + 1.6, range_brace(0, 4)[0] / 30 + 0.425-0.115, color='black', lw=1.0,
+                clip_on=False)
+    ax.plot(range_brace(0, 3.5, height=0.05)[1] * 1 + 1.6, range_brace(0, 4)[0] / 30 + 0.25-0.115, color='black', lw=1.0,
+                clip_on=False)
+    ax.plot(range_brace(0, 3.5, height=0.05)[1] * 1 + 1.6, range_brace(0, 4)[0] / 30 + 0.07-0.115, color='black', lw=1.0,
+                clip_on=False)
+    ax.text(1.7, 0.35+0.025, s='low error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
+                ha='left', va='center')
+    ax.text(1.7, 0.175+0.025, s='medium error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
+                ha='left', va='center')
+    ax.text(1.7, 0.025, s='high error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
+                ha='left', va='center')
 
-    # mask_selected = [13, 64, 172] # S12-2
-    # mask_selected = [8, 73, 171] # S14-2
-    # for index in range(len(mask_selected)):
-    #     print(math.pow(10, test[mask_selected[index], 0]+3), math.pow(10, test[mask_selected[index], 1]+3),
-    #           math.pow(10, test[mask_selected[index], 2]+3))
-    #     print(maes_profile_r[mask[mask_selected[index]]]*1e3)
-    #     ax.plot(np.arange(0, 300, 30),
-    #                 [1] + profiles_true[mask_selected[index], :].tolist(),
-    #                  marker='o', c=c[index], label='Simulated', markersize=8,)
-    #     ax.plot(np.arange(0, 300, 30),
-    #                     [1] + profiles_pred[mask_selected[index], :].tolist(),
-    #                  marker='D', c=c[index], label='Predicted', markersize=8)
-    # plt.legend(loc=(0.025, 0.01), frameon=False, prop={'family': 'Arial', 'size': '14', 'weight': '500'})
-    # ax.set_xlim(-15, 300)
-    # ax.set_xticks([0, 50, 100, 150, 200, 250, 300])
-    # ax.set_xticklabels([0, 50, 100, 150, 200, 250, 300],
-    #                        fontfamily='Arial', fontsize=18, fontweight='500')
-    # ax.plot(range_brace(0, 3.5, height=0.05)[1] * 30 + 90, range_brace(0, 4)[0] / 30 + 0.425-0.115, color='black', lw=1.0,
-    #             clip_on=False)
-    # ax.plot(range_brace(0, 3.5, height=0.05)[1] * 30 + 90, range_brace(0, 4)[0] / 30 + 0.25-0.115, color='black', lw=1.0,
-    #             clip_on=False)
-    # ax.plot(range_brace(0, 3.5, height=0.05)[1] * 30 + 90, range_brace(0, 4)[0] / 30 + 0.07-0.115, color='black', lw=1.0,
-    #             clip_on=False)
-    # ax.text(100, 0.35 + 0.025, s='low error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
-    #         ha='left', va='center')
-    # ax.text(100, 0.175 + 0.025, s='medium error',
-    #         fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
-    #         ha='left', va='center')
-    # ax.text(100, 0.025, s='high error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
-    #         ha='left', va='center')
+    mask_selected = [13, 64, 172] # S12-2
+    mask_selected = [8, 73, 171] # S14-2
+    for index in range(len(mask_selected)):
+        print(math.pow(10, test[mask_selected[index], 0]+3), math.pow(10, test[mask_selected[index], 1]+3),
+              math.pow(10, test[mask_selected[index], 2]+3))
+        print(maes_profile_r[mask[mask_selected[index]]]*1e3)
+        ax.plot(np.arange(0, 300, 30),
+                    [1] + profiles_true[mask_selected[index], :].tolist(),
+                     marker='o', c=c[index], label='Simulated', markersize=8,)
+        ax.plot(np.arange(0, 300, 30),
+                        [1] + profiles_pred[mask_selected[index], :].tolist(),
+                     marker='D', c=c[index], label='Predicted', markersize=8)
+    plt.legend(loc=(0.025, 0.01), frameon=False, prop={'family': 'Arial', 'size': '14', 'weight': '500'})
+    ax.set_xlim(-15, 300)
+    ax.set_xticks([0, 50, 100, 150, 200, 250, 300])
+    ax.set_xticklabels([0, 50, 100, 150, 200, 250, 300],
+                           fontfamily='Arial', fontsize=18, fontweight='500')
+    ax.plot(range_brace(0, 3.5, height=0.05)[1] * 30 + 90, range_brace(0, 4)[0] / 30 + 0.425-0.115, color='black', lw=1.0,
+                clip_on=False)
+    ax.plot(range_brace(0, 3.5, height=0.05)[1] * 30 + 90, range_brace(0, 4)[0] / 30 + 0.25-0.115, color='black', lw=1.0,
+                clip_on=False)
+    ax.plot(range_brace(0, 3.5, height=0.05)[1] * 30 + 90, range_brace(0, 4)[0] / 30 + 0.07-0.115, color='black', lw=1.0,
+                clip_on=False)
+    ax.text(100, 0.35 + 0.025, s='low error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
+            ha='left', va='center')
+    ax.text(100, 0.175 + 0.025, s='medium error',
+            fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
+            ha='left', va='center')
+    ax.text(100, 0.025, s='high error', fontdict={'fontfamily': 'Arial', 'fontsize': '14', 'fontweight': '500'},
+            ha='left', va='center')
 
     # plt.show()
+    plt.savefig('Figures/S17-18-cf.svg', dpi=600)
 
